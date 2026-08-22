@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+</head>
+<body>
+<x-dc>
+<!--[CDATA[<sc-helmet-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #F4F1EA; }
+  body { font-family: "Space Grotesk", "Helvetica Neue", Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #C85A32; text-decoration: none; }
+  a:hover { color: #2A211B; }
+  ::selection { background: #DA9F38; color: #2A211B; }
+</style>
+
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#F4F1EA;color:#2A211B">
+
+  <header style="position:sticky;top:0;z-index:20;background:#F4F1EA;padding:16px 0 10px">
+    <div style="max-width:1180px;margin:0 auto;padding:0 28px">
+    <div style="background:#2A211B;color:#F4F1EA;padding:0 22px;height:58px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="index.html" style="display:flex;align-items:baseline;gap:10px;color:#F4F1EA">
+        <div style="width:12px;height:12px;background:#C85A32;border-radius:50%"></div>
+        <span style="font-size:18px;font-weight:700;letter-spacing:-0.02em">{{ site.name }}</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:22px">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+          <a href="{{ item.href }}" style="{{ item.style }}">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+    </div>
+    </div>
+  </header>
+
+  <main style="flex:1;width:100%;max-width:1180px;margin:0 auto;padding:0 28px">
+
+        <section style="display:grid;grid-template-columns:1.2fr 1fr;border-bottom:1px solid #2A211B">
+          <div style="padding:70px 48px 58px 0;display:flex;flex-direction:column;gap:22px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#4A5D3A">{{ heron.kicker }}</div>
+              <div style="padding:4px 9px;background:#DA9F38;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase">{{ heron.status }}</div>
+            </div>
+            <h1 style="margin:0;font-size:clamp(44px,6vw,78px);line-height:0.94;letter-spacing:-0.035em;font-weight:700">{{ heron.name }}</h1>
+            <p style="margin:0;max-width:50ch;font-size:18px;line-height:1.6;color:#57534A;text-wrap:pretty">{{ heron.tagline }}</p>
+            <p style="margin:0;max-width:56ch;font-size:15px;line-height:1.7;color:#57534A">{{ heron.overview }}</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;padding-top:6px">
+              <sc-for list="{{ heron.links }}" as="l" hint-placeholder-count="2">
+                <a href="{{ l.href }}" style="padding:12px 20px;border:1px solid #2A211B;color:#2A211B;font-size:13px;font-weight:600;letter-spacing:0.04em" style-hover="background:#2A211B;color:#F4F1EA">{{ l.label }}</a>
+              </sc-for>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;color:#8C8677">By downloading, you agree to our <a href="privacypolicy.html">Privacy Policy</a></div>
+          </div>
+          <div style="border-left:1px solid #2A211B;padding:48px 0 48px 48px;display:flex;align-items:center;justify-content:center">
+            <div style="width:100%;max-width:320px;aspect-ratio:2/3;border:1px solid #2A211B;background:#EFEBE0;padding:20px;display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div style="display:flex;gap:4px">
+                  <div style="width:16px;height:3px;background:#4A5D3A"></div>
+                  <div style="width:16px;height:3px;background:#DA9F38"></div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.1em;text-align:right;line-height:1.7;color:#57534A">C++ · WinUI<br>Native</div>
+              </div>
+              <div style="{{ emblemPanel }}">
+                <div style="{{ emblemBird }}"></div>
+              </div>
+              <div style="display:flex;gap:0;border:1px solid #2A211B">
+                <sc-for list="{{ heron.themes }}" as="t" hint-placeholder-count="7">
+                  <div onClick="{{ t.onClick }}" title="{{ t.name }}" style="{{ t.swatchStyle }}"></div>
+                </sc-for>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#57534A">Theme — {{ activeThemeName }}</div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-end">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.08em;line-height:1.7;color:#57534A">Notes for Windows<br>{{ heron.version }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500">/01</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #2A211B">
+          <sc-for list="{{ heron.stats }}" as="s" hint-placeholder-count="4">
+            <div style="padding:26px 24px 26px 0;display:flex;flex-direction:column;gap:6px">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8C8677">{{ s.k }}</div>
+              <div style="font-size:26px;font-weight:600;letter-spacing:-0.03em">{{ s.v }}</div>
+            </div>
+          </sc-for>
+        </section>
+
+        <section style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid #2A211B">
+          <div style="padding:52px 48px 52px 0;border-right:1px solid #2A211B">
+            <h2 style="margin:0 0 26px;font-size:14px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">What it does</h2>
+            <div style="display:flex;flex-direction:column;gap:0">
+              <sc-for list="{{ heron.features }}" as="f" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:26px 1fr;gap:14px;align-items:start;padding:15px 0;border-bottom:1px solid rgba(42,33,27,0.15)">
+                  <div style="display:flex;justify-content:center;padding-top:8px"><div style="{{ f.dotStyle }}"></div></div>
+                  <div>
+                    <div style="font-size:16px;font-weight:600;letter-spacing:-0.01em">{{ f.title }}</div>
+                    <div style="font-size:14px;color:#57534A;line-height:1.55;padding-top:3px">{{ f.detail }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:52px 0 52px 48px;display:flex;flex-direction:column;gap:40px">
+            <div>
+              <h2 style="margin:0 0 18px;font-size:14px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Stack</h2>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ heron.stack }}" as="s" hint-placeholder-count="7">
+                  <div style="padding:7px 12px;border:1px solid #2A211B;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em">{{ s }}</div>
+                </sc-for>
+              </div>
+            </div>
+            <div>
+              <h2 style="margin:0 0 18px;font-size:14px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Roadmap</h2>
+              <div style="display:flex;flex-direction:column;gap:0">
+                <sc-for list="{{ heron.roadmap }}" as="r" hint-placeholder-count="4">
+                  <div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(42,33,27,0.15)">
+                    <div style="font-size:15px">{{ r.item }}</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8C8677;letter-spacing:0.08em;white-space:nowrap">{{ r.when }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section style="padding:52px 0 72px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;border-bottom:1px solid #2A211B;padding-bottom:14px;margin-bottom:24px">
+            <h2 style="margin:0;font-size:14px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Appearance</h2>
+            <div style="font-size:14px;color:#57534A;max-width:44ch">Eight built-in color schemes. Optionally, you can choose your own combination......... You're not going to want to.&nbsp;</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+            <sc-for list="{{ heron.themes }}" as="t" hint-placeholder-count="7">
+              <div style="border:1px solid #2A211B;display:flex;flex-direction:column">
+                <div style="background:{{ t.bg }};padding:16px;height:110px;display:flex;flex-direction:column;gap:6px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:{{ t.fg }}">1&nbsp; {{ t.name }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:{{ t.fg }};opacity:0.45">2</div>
+                </div>
+                <div style="border-top:1px solid #2A211B;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px">
+                  <span style="font-size:13px;font-weight:600">{{ t.name }}</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8C8677">{{ t.bg }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style="border-top:1px solid #2A211B;padding:22px 0 60px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#57534A">
+          <span>© 2026 Heron. All rights reserved.</span>
+          <div style="display:flex;align-items:center;gap:14px">
+            <a href="termsofservice.html">Terms of Service</a>
+            <span style="color:#8C8677">|</span>
+            <a href="privacypolicy.html">Privacy Policy</a>
+          </div>
+        </section>
+
+  </main>
+
+  <footer style="border-top:1px solid #2A211B;background:#F4F1EA">
+    <div style="max-width:1180px;margin:0 auto;padding:30px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:10px;height:10px;background:#4A5D3A"></div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#57534A">{{ site.footer }}</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C85A32&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[[&quot;#C85A32&quot;,&quot;#4A5D3A&quot;,&quot;#DA9F38&quot;,&quot;#3B2C21&quot;],[&quot;#4A5D3A&quot;,&quot;#C85A32&quot;,&quot;#DA9F38&quot;,&quot;#3B2C21&quot;],[&quot;#DA9F38&quot;,&quot;#3B2C21&quot;,&quot;#C85A32&quot;,&quot;#4A5D3A&quot;]],&quot;section&quot;:&quot;Theme&quot;}}">
+    class Component extends DCLogic {
+      /* ============================================================
+         SITE CONFIG — edit everything here. No JSX changes needed.
+         ============================================================ */
+      CONFIG = {
+        theme: {
+          paper: "#F4F1EA", ink: "#2A211B",
+          terracotta: "#C85A32", olive: "#4A5D3A", mustard: "#DA9F38", mocha: "#3B2C21"
+        },
+        site: {
+          name: "tyjaefox.dev",
+          owner: "Ty Fox",
+          email: "hey@tyjaefox.dev",
+          mailto: "mailto:hey@tyjaefox.dev",
+          footer: "© 2026"
+        },
+        nav: [
+          { id: "home", label: "Index", href: "index.html" },
+          { id: "heron", label: "Heron", href: "heron.html" },
+          { id: "portfolio", label: "Portfolio", href: "index.html#portfolio" },
+          { id: "about", label: "About", href: "index.html#about" },
+          { id: "blog", label: "Notes", href: "index.html#blog" }
+        ],
+        heron: {
+          kicker: "Personal project — Windows desktop",
+          status: "In development",
+          name: "Heron",
+          version: "Windows 10 & 11 — 64-bit",
+          mark: "assets/heron-mark-paper.png",
+          tagline: "Persistent sticky notes for Windows. Instant to open, invisible when idle, entirely local.",
+          overview: "Heron is a native notes app for people who want a note on screen faster than they can think of what to write. Written purely in C++, it consistently uses under 10 MB of memory, opens with no splash screen or warmup, and functions as a tool, not a service. No login, no cloud sync, no uploads. It is simple, elegant, and is excels at being exactly what it claims to be.",
+          links: [
+            { label: "Download on the Microsoft Store", href: "#" },
+            { label: "Release notes", href: "#" },
+            { label: "GitHub", href: "#" }
+          ],
+          stats: [
+            { k: "Memory", v: "< 10 MB" },
+            { k: "Cold start", v: "Instant" },
+            { k: "Accounts", v: "None" },
+            { k: "Manual saves", v: "Zero" }
+          ],
+          features: [
+            { title: "Simple by design", detail: "Everything you need, nothing you don't.", done: true },
+            { title: "Instant and lightweight", detail: "Fast, responsive, and designed to keep system usage low.", done: true },
+            { title: "Notes that persist", detail: "Every note stays exactly where you left it, how you left it.", done: true },
+            { title: "Always within reach", detail: "Keep notes convenient without cluttering your desktop.", done: true },
+            { title: "Appearance themes", detail: "Eight built-in colour schemes, switchable per note.", done: true },
+            { title: "System tray integration", detail: "Lives in the tray, out of the taskbar, one click from anywhere.", done: true },
+            { title: "Familiar, refined", detail: "Exceptional performance with a familiar feel.", done: true }
+          ],
+          stack: ["C++", "WinUI"],
+          themes: [
+            { name: "Old Paper", bg: "#F2E8C3", fg: "#4A4432" },
+            { name: "Pure White", bg: "#FFFFFF", fg: "#1F1F1F" },
+            { name: "Forest Green", bg: "#182820", fg: "#F2E3C2" },
+            { name: "Classic Navy", bg: "#1F2836", fg: "#E7E3D6" },
+            { name: "Maroon", bg: "#30181C", fg: "#F2E3C2" },
+            { name: "Mocha", bg: "#3B2C21", fg: "#E9C9A8" },
+            { name: "Soft Pink", bg: "#EFBECE", fg: "#4A3038" },
+            { name: "Vanta-Black", bg: "#0A0A0A", fg: "#EDEDED" }
+          ],
+          roadmap: [
+            { item: "Custom text file destination setting", when: "Next" },
+            { item: "Optimized file storage system for accessing older notes", when: "Next" },
+            { item: "Expanded formatting settings", when: "Planned" },
+            { item: "Expanded keyboard shortcuts", when: "Planned" },
+            { item: "Per-note always-on-top pinning", when: "Planned" }
+          ]
+        }
+      };
+
+      state = { themeIdx: 0 };
+
+      blockStyle(p) {
+        const band = p.band || (p.shape === "square" ? "42%" : p.shape === "triangle" ? "30%" : "54%");
+        return `position:absolute;left:0;right:0;bottom:0;height:${band};background:${p.color}`;
+      }
+
+      shapeStyle(p) {
+        const c = p.color;
+        if (p.shape === "circle") return `position:absolute;right:8%;top:10%;width:46px;height:46px;border-radius:50%;background:#DA9F38`;
+        if (p.shape === "square") return `position:absolute;left:8%;top:14%;width:44px;height:44px;background:${c === "#DA9F38" ? "#4A5D3A" : "#DA9F38"}`;
+        return `position:absolute;left:50%;bottom:30%;transform:translateX(-50%);width:0;height:0;border-left:34px solid transparent;border-right:34px solid transparent;border-bottom:58px solid #DA9F38`;
+      }
+
+      renderVals() {
+        const C = this.CONFIG;
+        const accent = this.props.accent ?? C.theme.terracotta;
+
+        const navItems = C.nav.map((n) => ({
+          label: n.label,
+          href: n.href,
+          style: {
+            cursor: "pointer",
+            paddingBottom: "3px",
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "11px",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "#F4F1EA",
+            borderBottom: n.id === "heron" ? "2px solid #DA9F38" : "2px solid transparent"
+          }
+        }));
+
+        const themeIdx = Math.min(this.state.themeIdx, C.heron.themes.length - 1);
+        const activeTheme = C.heron.themes[themeIdx];
+        const birdMask = "url(assets/heron-bird-cream.png) center / contain no-repeat";
+
+        const heron = {
+          ...C.heron,
+          features: C.heron.features.map((f) => ({
+            ...f,
+            dotStyle: f.done
+              ? `width:9px;height:9px;border-radius:50%;background:${accent}`
+              : `width:9px;height:9px;border-radius:50%;border:1.5px solid ${accent}`
+          })),
+          themes: C.heron.themes.map((t, i) => ({
+            ...t,
+            onClick: () => this.setState({ themeIdx: i }),
+            swatchStyle: {
+              flex: 1,
+              height: "22px",
+              background: t.bg,
+              cursor: "pointer",
+              boxShadow: i === themeIdx ? "inset 0 0 0 2px #DA9F38" : "none"
+            }
+          }))
+        };
+
+        return {
+          site: C.site,
+          heron,
+          navItems,
+          activeThemeName: activeTheme.name,
+          emblemPanel: {
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: activeTheme.bg,
+            aspectRatio: "1",
+          },
+          emblemBird: {
+            flex: 1,
+            background: birdMask,
+            height: "100%",
+            width: "100%"
+          }
+        };
+      }
+    }
+</script>
+</body>
+</html>

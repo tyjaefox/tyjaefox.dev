@@ -1,0 +1,22 @@
+# Enable mod_rewrite
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Set the base directory for rewrites
+  RewriteBase /
+
+  # Rewrite clean URLs to their respective files
+  # /heron -> heron.html
+  RewriteRule ^heron/?$ heron.html [L,QSA]
+
+  # /privacypolicy -> privacypolicy.html
+  RewriteRule ^privacypolicy/?$ privacypolicy.html [L,QSA]
+
+  # /termsofservice -> termsofservice.html
+  RewriteRule ^termsofservice/?$ termsofservice.html [L,QSA]
+
+  # Don't rewrite actual files or directories
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+</IfModule>
