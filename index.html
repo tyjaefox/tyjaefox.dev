@@ -114,7 +114,7 @@
           </sc-for>
         </section>
       </div>
-S    </sc-if>
+</sc-if>
 
     <!-- ================= PORTFOLIO ================= -->
     <sc-if value="{{ isPortfolio }}" hint-placeholder-val="{{ false }}">
@@ -470,7 +470,7 @@ S    </sc-if>
           blockStyle: this.blockStyle(p),
           shapeStyle: this.shapeStyle(p),
           tagLine: p.tags.join(" / "),
-          onClick: () => p.id === "heron" ? window.location.href = "heron.html" : this.go("portfolio") n
+          onClick: () => p.id === "heron" ? window.location.href = "heron.html" : this.go("portfolio")
         }));
 
         const featured = C.home.featured
