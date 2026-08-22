@@ -447,7 +447,7 @@ S    </sc-if>
 
         const navItems = C.nav.map((n) => ({
           label: n.label,
-          onClick: () => this.go(n.id),
+          onClick: () => n.id === "heron" ? (window.location.href = "heron.html") : this.go(n.id),
           style: {
             cursor: "pointer",
             paddingBottom: "3px",
@@ -470,7 +470,7 @@ S    </sc-if>
           blockStyle: this.blockStyle(p),
           shapeStyle: this.shapeStyle(p),
           tagLine: p.tags.join(" / "),
-          onClick: () => p.id === "heron" ? window.location.href = "heron.html" : this.go("portfolio")
+          onClick: () => p.id === "heron" ? window.location.href = "heron.html" : this.go("portfolio") n
         }));
 
         const featured = C.home.featured
