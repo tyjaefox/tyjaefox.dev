@@ -116,130 +116,6 @@
       </div>
     </sc-if>
 
-    <!-- ================= HERON ================= -->
-    <sc-if value="{{ isHeron }}" hint-placeholder-val="{{ false }}">
-      <div>
-        <section style="display:grid;grid-template-columns:1.2fr 1fr;border-bottom:1px solid #2A211B">
-          <div style="padding:70px 48px 58px 0;display:flex;flex-direction:column;gap:22px">
-            <div style="display:flex;align-items:center;gap:12px">
-              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#4A5D3A">{{ heron.kicker }}</div>
-              <div style="padding:4px 9px;background:#DA9F38;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase">{{ heron.status }}</div>
-            </div>
-            <h1 style="margin:0;font-size:clamp(44px,6vw,78px);line-height:0.94;letter-spacing:-0.035em;font-weight:700">{{ heron.name }}</h1>
-            <p style="margin:0;max-width:50ch;font-size:18px;line-height:1.6;color:#57534A;text-wrap:pretty">{{ heron.tagline }}</p>
-            <p style="margin:0;max-width:56ch;font-size:15px;line-height:1.7;color:#57534A">{{ heron.overview }}</p>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;padding-top:6px">
-              <sc-for list="{{ heron.links }}" as="l" hint-placeholder-count="2">
-                <a href="{{ l.href }}" style="padding:12px 20px;border:1px solid #2A211B;color:#2A211B;font-size:13px;font-weight:600;letter-spacing:0.04em" style-hover="background:#2A211B;color:#F4F1EA">{{ l.label }}</a>
-              </sc-for>
-            </div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;color:#8C8677">By downloading, you agree to our <a href="privacypolicy.html">Privacy Policy</a></div>
-          </div>
-          <div style="border-left:1px solid #2A211B;padding:48px 0 48px 48px;display:flex;align-items:center;justify-content:center">
-            <div style="width:100%;max-width:320px;aspect-ratio:2/3;border:1px solid #2A211B;background:#EFEBE0;padding:20px;display:flex;flex-direction:column;gap:16px">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start">
-                <div style="display:flex;gap:4px">
-                  <div style="width:16px;height:3px;background:#4A5D3A"></div>
-                  <div style="width:16px;height:3px;background:#DA9F38"></div>
-                </div>
-                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.1em;text-align:right;line-height:1.7;color:#57534A">C++ · WinUI<br>Native</div>
-              </div>
-              <div style="{{ emblemPanel }}">
-                <div style="{{ emblemBird }}"></div>
-              </div>
-              <div style="display:flex;gap:0;border:1px solid #2A211B">
-                <sc-for list="{{ heron.themes }}" as="t" hint-placeholder-count="7">
-                  <div onClick="{{ t.onClick }}" title="{{ t.name }}" style="{{ t.swatchStyle }}"></div>
-                </sc-for>
-              </div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#57534A">Theme — {{ activeThemeName }}</div>
-              <div style="display:flex;justify-content:space-between;align-items:flex-end">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.08em;line-height:1.7;color:#57534A">Notes for Windows<br>{{ heron.version }}</div>
-                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500">/01</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #2A211B">
-          <sc-for list="{{ heron.stats }}" as="s" hint-placeholder-count="4">
-            <div style="padding:26px 24px 26px 0;display:flex;flex-direction:column;gap:6px">
-              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8C8677">{{ s.k }}</div>
-              <div style="font-size:26px;font-weight:600;letter-spacing:-0.03em">{{ s.v }}</div>
-            </div>
-          </sc-for>
-        </section>
-
-        <section style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid #2A211B">
-          <div style="padding:52px 48px 52px 0;border-right:1px solid #2A211B">
-            <h2 style="margin:0 0 26px;font-size:14px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">What it does</h2>
-            <div style="display:flex;flex-direction:column;gap:0">
-              <sc-for list="{{ heron.features }}" as="f" hint-placeholder-count="6">
-                <div style="display:grid;grid-template-columns:26px 1fr;gap:14px;align-items:start;padding:15px 0;border-bottom:1px solid rgba(42,33,27,0.15)">
-                  <div style="display:flex;justify-content:center;padding-top:8px"><div style="{{ f.dotStyle }}"></div></div>
-                  <div>
-                    <div style="font-size:16px;font-weight:600;letter-spacing:-0.01em">{{ f.title }}</div>
-                    <div style="font-size:14px;color:#57534A;line-height:1.55;padding-top:3px">{{ f.detail }}</div>
-                  </div>
-                </div>
-              </sc-for>
-            </div>
-          </div>
-          <div style="padding:52px 0 52px 48px;display:flex;flex-direction:column;gap:40px">
-            <div>
-              <h2 style="margin:0 0 18px;font-size:14px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Stack</h2>
-              <div style="display:flex;flex-wrap:wrap;gap:8px">
-                <sc-for list="{{ heron.stack }}" as="s" hint-placeholder-count="7">
-                  <div style="padding:7px 12px;border:1px solid #2A211B;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em">{{ s }}</div>
-                </sc-for>
-              </div>
-            </div>
-            <div>
-              <h2 style="margin:0 0 18px;font-size:14px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Roadmap</h2>
-              <div style="display:flex;flex-direction:column;gap:0">
-                <sc-for list="{{ heron.roadmap }}" as="r" hint-placeholder-count="4">
-                  <div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(42,33,27,0.15)">
-                    <div style="font-size:15px">{{ r.item }}</div>
-                    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8C8677;letter-spacing:0.08em;white-space:nowrap">{{ r.when }}</div>
-                  </div>
-                </sc-for>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section style="padding:52px 0 72px">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;border-bottom:1px solid #2A211B;padding-bottom:14px;margin-bottom:24px">
-            <h2 style="margin:0;font-size:14px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Appearance</h2>
-            <div style="font-size:14px;color:#57534A;max-width:44ch">Eight built-in color schemes. Optionally, you can choose your own combination......... You're not going to want to.&nbsp;</div>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
-            <sc-for list="{{ heron.themes }}" as="t" hint-placeholder-count="7">
-              <div style="border:1px solid #2A211B;display:flex;flex-direction:column">
-                <div style="background:{{ t.bg }};padding:16px;height:110px;display:flex;flex-direction:column;gap:6px">
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:{{ t.fg }}">1&nbsp; {{ t.name }}</div>
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:{{ t.fg }};opacity:0.45">2</div>
-                </div>
-                <div style="border-top:1px solid #2A211B;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px">
-                  <span style="font-size:13px;font-weight:600">{{ t.name }}</span>
-                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8C8677">{{ t.bg }}</span>
-                </div>
-              </div>
-            </sc-for>
-          </div>
-        </section>
-
-        <section style="border-top:1px solid #2A211B;padding:22px 0 60px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#57534A">
-          <span>© 2026 Heron. All rights reserved.</span>
-          <div style="display:flex;align-items:center;gap:14px">
-            <a href="termsofservice.html">Terms of Service</a>
-            <span style="color:#8C8677">|</span>
-            <a href="privacypolicy.html">Privacy Policy</a>
-          </div>
-        </section>
-      </div>
-    </sc-if>
-
     <!-- ================= PORTFOLIO ================= -->
     <sc-if value="{{ isPortfolio }}" hint-placeholder-val="{{ false }}">
       <div>
@@ -493,7 +369,7 @@ class Component extends DCLogic {
     },
     portfolioIntro: "One project on show for now — the one I actually want you to look at. More will land here as they ship.",
     projects: [
-      { id: "heron", title: "Heron", year: "2026", color: "#30181C", band: "100%", shape: "circle", summary: "Native Windows sticky-notes application. ", tags: ["Desktop app", "C++", "WinUI"], href: "#", linkLabel: "Overview" },
+      { id: "heron", title: "Heron", year: "2026", color: "#30181C", band: "100%", shape: "circle", summary: "Native Windows sticky-notes application. ", tags: ["Desktop app", "C++", "WinUI"], href: "heron.html", linkLabel: "Overview" },
       /* Add further projects here — same shape as the entry above.
          shape: "circle" | "square" | "triangle" sets the poster geometry. */
     ],
@@ -594,7 +470,7 @@ class Component extends DCLogic {
       blockStyle: this.blockStyle(p),
       shapeStyle: this.shapeStyle(p),
       tagLine: p.tags.join(" / "),
-      onClick: () => (p.id === "heron" ? this.go("heron") : this.go("portfolio"))
+      onClick: () => (p.id === "heron" ? window.location.href = "heron.html" : this.go("portfolio"))
     }));
 
     const featured = C.home.featured
@@ -666,7 +542,7 @@ class Component extends DCLogic {
       isBlog: view === "blog",
       isPost: view === "post",
       goHome: () => this.go("home"),
-      goHeron: () => this.go("heron"),
+      goHeron: () => window.location.href = "heron.html",
       goPortfolio: () => this.go("portfolio"),
       goBlog: () => this.go("blog"),
       goAbout: () => this.go("about")
