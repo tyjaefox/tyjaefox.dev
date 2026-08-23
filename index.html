@@ -64,20 +64,21 @@
               <div style="display:flex;flex-direction:column;gap:14px">
                 <label style="display:flex;flex-direction:column;gap:5px">
                   <span style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:#57534A">Your name</span>
-                  <input type="text" placeholder="John (OR JANE!) Doe" style="border:none;border-bottom:1px solid #2A211B;background:transparent;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#2A211B;padding:5px 0;outline:none;width:100%">
+                  <input type="text" placeholder="John (OR JANE!) Doe" value="{{ contact.name }}" onChange="{{ onContactNameChange }}" style="border:none;border-bottom:1px solid #2A211B;background:transparent;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#2A211B;padding:5px 0;outline:none;width:100%">
                 </label>
                 <label style="display:flex;flex-direction:column;gap:5px">
                   <span style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:#57534A">Your email</span>
-                  <input type="email" placeholder="johnorjanedoe@email.com" style="border:none;border-bottom:1px solid #2A211B;background:transparent;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#2A211B;padding:5px 0;outline:none;width:100%">
+                  <input type="email" placeholder="johnorjanedoe@email.com" value="{{ contact.email }}" onChange="{{ onContactEmailChange }}" style="border:none;border-bottom:1px solid #2A211B;background:transparent;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#2A211B;padding:5px 0;outline:none;width:100%">
                 </label>
                 <label style="display:flex;flex-direction:column;gap:5px">
                   <span style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:#57534A">Your message</span>
-                  <textarea rows="3" placeholder="&quot;How did you become a super-genius?&quot;, &quot;I'm your biggest fan!&quot;, etc." style="border:1px solid #2A211B;background:transparent;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#2A211B;padding:8px;outline:none;resize:none;width:100%"></textarea>
+                  <textarea rows="3" placeholder="&quot;How did you become a super-genius?&quot;, &quot;I'm your biggest fan!&quot;, etc." value="{{ contact.message }}" onChange="{{ onContactMessageChange }}" style="border:1px solid #2A211B;background:transparent;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#2A211B;padding:8px;outline:none;resize:none;width:100%"></textarea>
                 </label>
+                <input type="text" name="company" value="{{ contact.company }}" onChange="{{ onContactCompanyChange }}" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
               </div>
-              <div style="background:#2A211B;color:#F4F1EA;text-align:center;padding:11px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer" style-hover="background:#C85A32">Send</div>
+              <div onClick="{{ submitContact }}" style="background:#2A211B;color:#F4F1EA;text-align:center;padding:11px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer" style-hover="background:#C85A32">{{ contact.sendLabel }}</div>
               <div style="display:flex;justify-content:space-between;align-items:flex-end">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.08em;line-height:1.7;color:#57534A"><br></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.08em;line-height:1.7;color:#57534A">{{ contact.statusMessage }}</div>
                 <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500"><br></div>
               </div>
             </div>
@@ -423,9 +424,43 @@
         ]
       };
 
-      state = { view: "home", postId: null, themeIdx: 0 };
+      state = {
+        view: "home", postId: null, themeIdx: 0,
+        contact: { name: "", email: "", message: "", company: "", status: "idle", errorMessage: "" }
+      };
 
       go = (view) => this.setState({ view, postId: null });
+
+      setContactField = (field, value) => this.setState({ contact: { ...this.state.contact, [field]: value } });
+
+      submitContact = async () => {
+        const { name, email, message, company } = this.state.contact;
+        if (company) return;
+        if (!name.trim() || !email.trim() || !message.trim()) {
+          this.setState({ contact: { ...this.state.contact, status: "error", errorMessage: "Please fill in every field." } });
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+          this.setState({ contact: { ...this.state.contact, status: "error", errorMessage: "That email address doesn't look valid." } });
+          return;
+        }
+        this.setState({ contact: { ...this.state.contact, status: "sending", errorMessage: "" } });
+        try {
+          const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, message, company })
+          });
+          const data = await res.json().catch(() => ({}));
+          if (res.ok && data.ok) {
+            this.setState({ contact: { name: "", email: "", message: "", company: "", status: "sent", errorMessage: "" } });
+          } else {
+            this.setState({ contact: { ...this.state.contact, status: "error", errorMessage: data.error || "Something went wrong. Please try again." } });
+          }
+        } catch {
+          this.setState({ contact: { ...this.state.contact, status: "error", errorMessage: "Network error. Please try again." } });
+        }
+      };
 
       /* poster ground: a colour band plus one geometric form, drawn per project */
       blockStyle(p) {
@@ -505,6 +540,17 @@
         const posts = C.posts.map((p) => ({ ...p, onClick: () => this.setState({ view: "post", postId: p.id }) }));
         const current = C.posts.find((p) => p.id === this.state.postId) || C.posts[0];
 
+        const contactStatus = this.state.contact.status;
+        const contact = {
+          ...this.state.contact,
+          sendLabel: contactStatus === "sending" ? "Sending…" : contactStatus === "sent" ? "Sent" : "Send",
+          statusMessage: contactStatus === "sent"
+            ? "Thanks — I'll get back to you soon."
+            : contactStatus === "error"
+            ? (this.state.contact.errorMessage || "Something went wrong.")
+            : " "
+        };
+
         return {
           site: C.site,
           home: C.home,
@@ -545,7 +591,13 @@
           goHeron: () => window.location.href = "heron.html",
           goPortfolio: () => this.go("portfolio"),
           goBlog: () => this.go("blog"),
-          goAbout: () => this.go("about")
+          goAbout: () => this.go("about"),
+          contact,
+          onContactNameChange: (e) => this.setContactField("name", e.target.value),
+          onContactEmailChange: (e) => this.setContactField("email", e.target.value),
+          onContactMessageChange: (e) => this.setContactField("message", e.target.value),
+          onContactCompanyChange: (e) => this.setContactField("company", e.target.value),
+          submitContact: this.submitContact
         };
       }
     }
