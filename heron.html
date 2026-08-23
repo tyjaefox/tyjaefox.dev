@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+<script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
 </head>
 <body>
 <x-dc>
@@ -51,12 +52,15 @@
             <h1 style="margin:0;font-size:clamp(44px,6vw,78px);line-height:0.94;letter-spacing:-0.035em;font-weight:700">{{ heron.name }}</h1>
             <p style="margin:0;max-width:50ch;font-size:18px;line-height:1.6;color:#57534A;text-wrap:pretty">{{ heron.tagline }}</p>
             <p style="margin:0;max-width:56ch;font-size:15px;line-height:1.7;color:#57534A">{{ heron.overview }}</p>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;padding-top:6px">
+            <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start;padding-top:10px">
+              <ms-store-badge productid="9PHC7FM59QWH" productname="Heron - Notes, simplified" window-mode="direct" theme="auto" size="large" language="en-us" animation="on" style="display:block;height:104px"></ms-store-badge>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;color:#8C8677">By downloading, you agree to our <a href="privacypolicy.html">Privacy Policy</a></div>
+            </div>
+            <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center;padding-top:4px;border-top:1px solid rgba(42,33,27,0.18);margin-top:4px">
               <sc-for list="{{ heron.links }}" as="l" hint-placeholder-count="2">
-                <a href="{{ l.href }}" style="padding:12px 20px;border:1px solid #2A211B;color:#2A211B;font-size:13px;font-weight:600;letter-spacing:0.04em" style-hover="background:#2A211B;color:#F4F1EA">{{ l.label }}</a>
+                <a href="{{ l.href }}" target="_blank" rel="noopener noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2A211B;padding-top:16px" style-hover="color:#C85A32">{{ l.label }} →</a>
               </sc-for>
             </div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;color:#8C8677">By downloading, you agree to our <a href="privacypolicy.html">Privacy Policy</a></div>
           </div>
           <div style="border-left:1px solid #2A211B;padding:48px 0 48px 48px;display:flex;align-items:center;justify-content:center">
             <div style="width:100%;max-width:320px;aspect-ratio:2/3;border:1px solid #2A211B;background:#EFEBE0;padding:20px;display:flex;flex-direction:column;gap:16px">
@@ -206,7 +210,7 @@
           tagline: "Persistent sticky notes for Windows. Instant to open, invisible when idle, entirely local.",
           overview: "Heron is a native notes app for people who want a note on screen faster than they can think of what to write. Written purely in C++, it consistently uses under 10 MB of memory, opens with no splash screen or warmup, and functions as a tool, not a service. No login, no cloud sync, no uploads. It is simple, elegant, and is excels at being exactly what it claims to be.",
           links: [
-            { label: "Download on the Microsoft Store", href: "#" },
+            { label: "Store page", href: "https://apps.microsoft.com/detail/9phc7fm59qwh?hl=en-US&gl=US" },
             { label: "Release notes", href: "#" },
             { label: "GitHub", href: "#" }
           ],
