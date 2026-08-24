@@ -1,4 +1,4 @@
-// tyjaefox.dev -- Notes articles data.
+// Notes articles template.
 //
 // To publish a new note:
 // 1. Copy the TEMPLATE object below.
@@ -7,7 +7,7 @@
 //    shows as the newest note. Don't forget a comma after the closing `}`
 //    if it's not the last entry.
 //
-// TEMPLATE -- copy this whole object:
+// TEMPLATE - copy this whole object:
 //
 // {
 //   id: "your-post-slug",              // kebab-case, must be unique
@@ -26,6 +26,7 @@
 // }
 
 window.SITE_POSTS = [
+          // Starting Note - First Post on Site
           {
             "id": "starting-here",
             "title": "Starting here",
@@ -47,4 +48,20 @@ window.SITE_POSTS = [
               "Even writing this initial post feels good. I recommend anyone that is interested or involved in software development (or any field for that matter) to find a way to express your interests publicly, even if it’s completely anonymous."
             ]
           }
+
+           {
+             "id": "heron-v100-release-notes",              // kebab-case, must be unique
+             "title": "Heron v1.0.0 Release Notes",
+             "date": "24 Aug 2026",               // "D Mon YYYY"
+             "read": "3 min",                     // "N min"
+             "tags": ["Heron", "Release Notes"],      // 1-3 short keywords
+             "excerpt": "Version Summary, Features, and Known Issues." ,
+             "pullLabel": "Personal Notes",
+             "pull": "I'm glad to finally be able to publicly release Heron. Feel free to contact me directly with feedback by using the Contact Me form on the Index page of the site.  ",
+             "body": [
+               "Version Summary: Initial release, made publicly available on MS Store, GitHub, and Gumroad.",
+               "Feature List: Persistent notes with no enforced cloud-saves, login, advertisements, or dependencies. Able to configure font sizing, color scheme, text wrapping, and line numbers. System Tray integration, allowing quick access when no note is currently open. All dependencies compiled, so no additional setup required outside of clicking Install.",
+               "Known Issues: Incorrect pathing for System Tray 'Open Notes Folder' option. Works for .exe version (Github, Gumroad), but Microsoft .msix packaging affects storage path. This is inconvenient due to lack of solidified, in-window delete option. Storage folder is located in C:/Users/AppData/Local/Packages/tyjaefox.devxxxxxx/LocalCache/Local. If AppData folder isn't visible, select View -> Show -> Hidden Items in File Explorer. This is the priority issue along with origin folder organization with v1.0.1 "
+             ]
+           }
 ];
