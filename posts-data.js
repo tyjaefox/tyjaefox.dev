@@ -47,7 +47,7 @@ window.SITE_POSTS = [
               "In the ‘About Me’ section, there are links to my X and LinkedIn profiles, as well. I will most likely post more frequently on X, but might share more structured posts on LinkedIn about open-source contributions I’ve made or other more ‘professional’ projects.",
               "Even writing this initial post feels good. I recommend anyone that is interested or involved in software development (or any field for that matter) to find a way to express your interests publicly, even if it’s completely anonymous."
             ]
-          }
+          },
 
            {
              "id": "heron-v100-release-notes",           
