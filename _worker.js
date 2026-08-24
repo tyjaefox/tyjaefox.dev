@@ -9,12 +9,6 @@ function jsonResponse(body, status) {
 }
 
 async function handleContact(request, env) {
-  console.error(
-    "RESEND_API_KEY binding check:",
-    typeof env.RESEND_API_KEY,
-    env.RESEND_API_KEY ? `length ${env.RESEND_API_KEY.length}, starts "${env.RESEND_API_KEY.slice(0, 3)}", ends "${env.RESEND_API_KEY.slice(-2)}"` : "empty/undefined"
-  );
-
   let data;
   try {
     data = await request.json();
