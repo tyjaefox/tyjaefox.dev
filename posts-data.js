@@ -50,11 +50,11 @@ window.SITE_POSTS = [
           }
 
            {
-             "id": "heron-v100-release-notes",              // kebab-case, must be unique
+             "id": "heron-v100-release-notes",           
              "title": "Heron v1.0.0 Release Notes",
-             "date": "24 Aug 2026",               // "D Mon YYYY"
-             "read": "3 min",                     // "N min"
-             "tags": ["Heron", "Release Notes"],      // 1-3 short keywords
+             "date": "24 Aug 2026",               
+             "read": "3 min",                     
+             "tags": ["Heron", "Release Notes"],      
              "excerpt": "Version Summary, Features, and Known Issues." ,
              "pullLabel": "Personal Notes",
              "pull": "I'm glad to finally be able to publicly release Heron. Feel free to contact me directly with feedback by using the Contact Me form on the Index page of the site.  ",
