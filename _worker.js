@@ -8,9 +8,7 @@ function jsonResponse(body, status) {
   });
 }
 
-export async function onRequestPost(context) {
-  const { request, env } = context;
-
+async function handleContact(request, env) {
   let data;
   try {
     data = await request.json();
@@ -61,3 +59,13 @@ export async function onRequestPost(context) {
 
   return jsonResponse({ ok: true }, 200);
 }
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    if (url.pathname === "/api/contact" && request.method === "POST") {
+      return handleContact(request, env);
+    }
+    return env.ASSETS.fetch(request);
+  }
+};

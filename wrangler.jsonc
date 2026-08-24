@@ -1,0 +1,12 @@
+{
+  "name": "tyjaefox-dev",
+  "compatibility_date": "2026-08-23",
+  "main": "_worker.js",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
